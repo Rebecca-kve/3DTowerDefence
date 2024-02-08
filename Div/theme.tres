@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c608py3inbrit"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fas87"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhb1s"]
+bg_color = Color(0.172549, 0.243137, 0.313726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wbgvh"]
+bg_color = Color(0.498039, 0.54902, 0.552941, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rhmh0"]
+bg_color = Color(0.431373, 0.670588, 0.411765, 1)
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 16
+Button/styles/disabled = SubResource("StyleBoxFlat_fas87")
+Button/styles/normal = SubResource("StyleBoxFlat_hhb1s")
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 16
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_wbgvh")
+Unlock/base_type = &"Button"
+Unlock/styles/disabled = SubResource("StyleBoxFlat_rhmh0")

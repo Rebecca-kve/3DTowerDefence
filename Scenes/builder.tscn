@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnfq4tqvg8fkx"]
+
+[ext_resource type="Script" path="res://Scripts/Builder.cs" id="1_jdc7w"]
+
+[node name="Builder" type="Node3D" node_paths=PackedStringArray("selector")]
+script = ExtResource("1_jdc7w")
+selector = NodePath("Selector")
+CollisionLayers = 1
+
+[node name="Selector" type="Node3D" parent="."]

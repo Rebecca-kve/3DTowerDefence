@@ -1,0 +1,186 @@
+[gd_scene load_steps=20 format=3 uid="uid://bcu3tiw78khsf"]
+
+[ext_resource type="Script" path="res://Scripts/SetupGame.cs" id="1_tmx7p"]
+[ext_resource type="PackedScene" uid="uid://cr01kshhr106i" path="res://Scenes/UI/tower_shop.tscn" id="1_w7uyc"]
+[ext_resource type="MeshLibrary" uid="uid://cso2ncqcc8xv4" path="res://Assets/Tiles/Land.tres" id="4_tyokq"]
+[ext_resource type="PackedScene" uid="uid://bnfq4tqvg8fkx" path="res://Scenes/builder.tscn" id="5_2d456"]
+[ext_resource type="Script" path="res://Scripts/BuildGridMap.cs" id="5_ykqdk"]
+[ext_resource type="PackedScene" uid="uid://cj67e6n1cbsoy" path="res://Scenes/camera.tscn" id="6_niqjq"]
+[ext_resource type="Script" path="res://Scripts/Button3D.cs" id="6_u80sv"]
+[ext_resource type="Material" uid="uid://e068hixpuaal" path="res://Assets/Materials/Dirt.tres" id="7_0ww1f"]
+[ext_resource type="Texture2D" uid="uid://cv6p1vwqylrwt" path="res://Assets/Icons/NTButton.png" id="7_6eqar"]
+[ext_resource type="PackedScene" uid="uid://cwrflmfa57340" path="res://Scenes/Tower/castle.tscn" id="8_m5ktm"]
+[ext_resource type="PackedScene" uid="uid://jr3pvo26xvt2" path="res://Scenes/Enemy/portal_tower.tscn" id="9_jpnhe"]
+[ext_resource type="PackedScene" uid="uid://dkqrfgjwe5e51" path="res://Scenes/UI/Perks/perktree.tscn" id="12_t5bsc"]
+[ext_resource type="Script" path="res://Scripts/GameOver.cs" id="12_tu30q"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pbplo"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_gg8gt"]
+sky_material = SubResource("ProceduralSkyMaterial_pbplo")
+
+[sub_resource type="Environment" id="Environment_g3l04"]
+background_mode = 2
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_gg8gt")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_55c3h"]
+height = 1.1
+radius = 3.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_n5gje"]
+viewport_path = NodePath("BuildGridMap/Button3D/SubViewport")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cgjxq"]
+material = ExtResource("7_0ww1f")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 1.0
+
+[node name="Level_01" type="Node3D"]
+script = ExtResource("1_tmx7p")
+startgold = 300
+
+[node name="TowerShop" parent="." node_paths=PackedStringArray("builder") instance=ExtResource("1_w7uyc")]
+builder = NodePath("../Builder")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.576432, -0.577808, 0.577809, 0, 0.707107, 0.707107, -0.817144, 0.407599, -0.407599, 0, 0, 0)
+shadow_enabled = true
+shadow_opacity = 0.7
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_g3l04")
+
+[node name="Castle" parent="." groups=["Castle"] instance=ExtResource("8_m5ktm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 19)
+
+[node name="BuildGridMap" type="GridMap" parent="." node_paths=PackedStringArray("nextturnbutton", "test") groups=["Buildable"]]
+mesh_library = ExtResource("4_tyokq")
+cell_size = Vector3(2, 1, 2)
+collision_layer = 9
+bake_navigation = true
+data = {
+"cells": PackedInt32Array(5, 6, 1, 4, 6, 1, 2, 6, 3, 3, 6, 655363, 1, 6, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 1, 7, 1, 1, 8, 4, 1, 9, 3, 1, 10, 1048580, 1, 11, 1, 2, 7, 3, 2, 8, 1048578, 2, 9, 1048578, 2, 10, 1048579, 2, 11, 1, 3, 7, 655363, 3, 8, 1048578, 3, 9, 1048578, 3, 10, 1048579, 3, 11, 1, 4, 7, 1, 4, 8, 1441796, 4, 9, 655363, 4, 10, 655364, 4, 11, 1, 5, 7, 1, 5, 8, 1, 5, 9, 1, 5, 10, 1, 5, 11, 1)
+}
+script = ExtResource("5_ykqdk")
+nextturnbutton = NodePath("Button3D")
+test = NodePath("../PortalTower")
+metadata/_editor_floor_ = Vector3(0, 0, -3)
+
+[node name="Button3D" type="StaticBody3D" parent="BuildGridMap" node_paths=PackedStringArray("button", "grid")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.5, 6)
+script = ExtResource("6_u80sv")
+button = NodePath("SubViewport/NextTurn")
+grid = NodePath("..")
+
+[node name="SubViewport" type="SubViewport" parent="BuildGridMap/Button3D"]
+transparent_bg = true
+size = Vector2i(1024, 1024)
+
+[node name="NextTurn" type="Button" parent="BuildGridMap/Button3D/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+toggle_mode = true
+text = "Next Turn"
+icon = ExtResource("7_6eqar")
+flat = true
+icon_alignment = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildGridMap/Button3D"]
+shape = SubResource("CylinderShape3D_55c3h")
+
+[node name="Sprite3D" type="Sprite3D" parent="BuildGridMap/Button3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.51, 0)
+axis = 1
+billboard = 2
+texture = SubResource("ViewportTexture_n5gje")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BuildGridMap/Button3D"]
+mesh = SubResource("CylinderMesh_cgjxq")
+
+[node name="Builder" parent="." node_paths=PackedStringArray("cameraScene", "gridmap") instance=ExtResource("5_2d456")]
+cameraScene = NodePath("../Camera")
+gridmap = NodePath("../BuildGridMap")
+
+[node name="Camera" parent="." instance=ExtResource("6_niqjq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 19)
+
+[node name="PortalTower" parent="." instance=ExtResource("9_jpnhe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+
+[node name="Perktree" parent="." node_paths=PackedStringArray("towerShop") instance=ExtResource("12_t5bsc")]
+towerShop = NodePath("../TowerShop")
+
+[node name="Game Over" type="Control" parent="." node_paths=PackedStringArray("score")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_tu30q")
+score = NodePath("PanelContainer/MarginContainer/VBoxContainer/Score")
+
+[node name="PanelContainer" type="PanelContainer" parent="Game Over"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Game Over/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Game Over/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Infected" type="Label" parent="Game Over/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "You're Castle has been infected!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="gameover" type="Label" parent="Game Over/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="Game Over/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Score: 10 Turns."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="Button" parent="Game Over/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "quit"
+
+[connection signal="CastleInfected" from="Castle" to="Game Over" method="_on_castle_castle_infected"]
+[connection signal="input_event" from="BuildGridMap/Button3D" to="BuildGridMap/Button3D" method="_on_input_event"]
+[connection signal="tree_exiting" from="BuildGridMap/Button3D" to="BuildGridMap/Button3D" method="_on_tree_exiting"]
+[connection signal="pressed" from="BuildGridMap/Button3D/SubViewport/NextTurn" to="BuildGridMap" method="_on_next_turn_pressed"]
+[connection signal="pressed" from="Game Over/PanelContainer/MarginContainer/VBoxContainer/Back" to="Game Over" method="_on_back_pressed"]

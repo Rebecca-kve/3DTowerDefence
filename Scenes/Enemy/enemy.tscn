@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://bx5l4244220g8"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/Enemy.cs" id="1_kf51c"]
+[ext_resource type="PackedScene" uid="uid://0ni26srp76ml" path="res://Assets/HealthBar/health_bar_3d.tscn" id="2_djemt"]
+[ext_resource type="PackedScene" uid="uid://cqvr5och6sg7u" path="res://Scenes/Enemy/movement_component.tscn" id="3_2krij"]
+[ext_resource type="Texture2D" uid="uid://brtdg47i34c72" path="res://Assets/HealthBar/HPBar.png" id="3_rm8oy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4covk"]
+albedo_color = Color(0.607843, 0.34902, 0.713726, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_3oksg"]
+material = SubResource("StandardMaterial3D_4covk")
+radius = 0.4
+height = 0.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_r6kmj"]
+radius = 0.4
+
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("healtbar") groups=["enemy"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_kf51c")
+healtbar = NodePath("HealthBar3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("SphereMesh_3oksg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_r6kmj")
+
+[node name="HealthBar3D" parent="." instance=ExtResource("2_djemt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+texture = ExtResource("3_rm8oy")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_max_distance = 2.01
+navigation_layers = 2
+path_postprocessing = 1
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("_navAgent", "enemy") instance=ExtResource("3_2krij")]
+_navAgent = NodePath("../NavigationAgent3D")
+enemy = NodePath("..")

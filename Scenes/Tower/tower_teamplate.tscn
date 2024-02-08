@@ -1,0 +1,114 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwlbm0plh65hj"]
+
+[ext_resource type="Material" uid="uid://dyogscrfb6qj6" path="res://Assets/Materials/rangepreviewmaterial.tres" id="2_6idic"]
+[ext_resource type="Texture2D" uid="uid://bycgsvobw65n5" path="res://Assets/Icons/Goldsmall.png" id="3_ekblw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f28ju"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3tc7m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ysgey"]
+size = Vector3(2, 2, 2)
+
+[node name="TowerTeamplate" type="Node3D"]
+
+[node name="Position" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Control" type="Control" parent="Position"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Position/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -94.5
+offset_right = 106.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Position/Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Position/Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="infotext" type="RichTextLabel" parent="Position/Control/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+text = "
+"
+
+[node name="GridContainer" type="GridContainer" parent="Position/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Upgrade Damage" type="Button" parent="Position/Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "15 +Damage "
+icon = ExtResource("3_ekblw")
+alignment = 0
+
+[node name="Upgrade Range" type="Button" parent="Position/Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+Range
+"
+icon = ExtResource("3_ekblw")
+alignment = 0
+
+[node name="Sell" type="Button" parent="Position/Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100g Sell"
+icon = ExtResource("3_ekblw")
+alignment = 0
+
+[node name="OptionButton" type="OptionButton" parent="Position/Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Position"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Position/StaticBody3D"]
+shape = SubResource("BoxShape3D_f28ju")
+
+[node name="Area3D" type="Area3D" parent="Position"]
+collision_layer = 4
+collision_mask = 2
+input_ray_pickable = false
+
+[node name="Detection" type="CollisionShape3D" parent="Position/Area3D"]
+shape = SubResource("SphereShape3D_3tc7m")
+
+[node name="RangePreview" type="CSGCylinder3D" parent="Position/Area3D"]
+visible = false
+sides = 20
+material = ExtResource("2_6idic")
+
+[node name="Shooting Sound" type="AudioStreamPlayer3D" parent="Position"]
+
+[node name="Tower Art" type="MeshInstance3D" parent="Position"]
+mesh = SubResource("BoxMesh_ysgey")
+
+[connection signal="gui_input" from="Position/Control" to="." method="_on_control_gui_input"]
+[connection signal="pressed" from="Position/Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Upgrade Damage" to="." method="_on_upgrade_damage_pressed"]
+[connection signal="pressed" from="Position/Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Upgrade Range" to="." method="_on_upgrade_range_pressed"]
+[connection signal="pressed" from="Position/Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Sell" to="." method="_on_sell_pressed"]
+[connection signal="item_selected" from="Position/Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="input_event" from="Position/StaticBody3D" to="." method="_on_static_body_3d_input_event"]

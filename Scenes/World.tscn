@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7s236xujenp5"]
+
+[sub_resource type="Environment" id="Environment_sg7ey"]
+background_energy_multiplier = 1.2
+tonemap_mode = 2
+tonemap_exposure = 0.5
+tonemap_white = 2.0
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sg7ey")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707107, 0.612372, -0.353553, 0, 0, 0)
+shadow_enabled = true
+shadow_opacity = 0.7

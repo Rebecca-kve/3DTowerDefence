@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://4jhefpwy53p2"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3b0he"]
+direction = Vector3(0, 1, 0)
+spread = 20.0
+initial_velocity_min = 20.0
+initial_velocity_max = 25.0
+angular_velocity_min = 50.0
+angular_velocity_max = 50.0
+collision_mode = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mko05"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_srtn3"]
+noise = SubResource("FastNoiseLite_mko05")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2j05g"]
+transparency = 1
+albedo_color = Color(0, 0.780392, 0.780392, 0.792157)
+normal_texture = SubResource("NoiseTexture2D_srtn3")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_8owk6"]
+material = SubResource("StandardMaterial3D_2j05g")
+size = Vector2(0.15, 0.15)
+
+[node name="Snow" type="GPUParticles3D"]
+amount = 150
+lifetime = 3.5
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_3b0he")
+draw_pass_1 = SubResource("QuadMesh_8owk6")

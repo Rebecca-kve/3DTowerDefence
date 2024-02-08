@@ -1,0 +1,205 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwrflmfa57340"]
+
+[ext_resource type="Script" path="res://Scripts/Tower/castle.cs" id="1_ppebl"]
+[ext_resource type="Texture2D" uid="uid://bx1ywocu50dtx" path="res://Assets/HealthBar/HPbar.jpg" id="2_kmux2"]
+[ext_resource type="Script" path="res://Scripts/Enemy/HealthBar3D.cs" id="3_1h6uk"]
+[ext_resource type="PackedScene" uid="uid://dnoke3wadoofw" path="res://Assets/Blender/C.blend" id="3_7x8xs"]
+[ext_resource type="Texture2D" uid="uid://brtdg47i34c72" path="res://Assets/HealthBar/HPBar.png" id="5_ofhuk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ngj6p"]
+size = Vector3(5, 6, 5)
+
+[node name="Castle" type="Node3D" node_paths=PackedStringArray("healtbar", "goldinfo", "bigHealthBar", "bigRepair", "healthtext")]
+script = ExtResource("1_ppebl")
+healtbar = NodePath("HealthBar3D")
+goldinfo = NodePath("Control/PanelContainer2/MarginContainer/Gold Info")
+bigHealthBar = NodePath("Control/PanelContainer/MarginContainer/Vbox/CastleHealth")
+bigRepair = NodePath("Control/PanelContainer/MarginContainer/Vbox/RepairCastle")
+healthtext = NodePath("Control/PanelContainer/MarginContainer/Vbox/CastleHealth/Healthtext")
+
+[node name="CastleUI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CastleUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -119.5
+offset_right = 106.0
+offset_bottom = 69.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+auto_translate = false
+
+[node name="MarginContainer" type="MarginContainer" parent="CastleUI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CastleUI/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CastleInfo" type="RichTextLabel" parent="CastleUI/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="Repair" type="Button" parent="CastleUI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Repair Castle"
+icon_alignment = 2
+expand_icon = true
+
+[node name="HealthBar3D" type="Sprite3D" parent="." node_paths=PackedStringArray("subViewport", "bloodbar", "text")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 3.83063, 0)
+billboard = 1
+texture = ExtResource("2_kmux2")
+script = ExtResource("3_1h6uk")
+subViewport = NodePath("SubViewport")
+bloodbar = NodePath("SubViewport/HealthBar2D")
+text = NodePath("SubViewport/Label")
+
+[node name="SubViewport" type="SubViewport" parent="HealthBar3D"]
+transparent_bg = true
+size = Vector2i(300, 50)
+
+[node name="HealthBar2D" type="TextureProgressBar" parent="HealthBar3D/SubViewport"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 158.0
+offset_bottom = 39.0
+texture_under = ExtResource("5_ofhuk")
+texture_progress = ExtResource("5_ofhuk")
+tint_under = Color(0.905882, 0.298039, 0.235294, 1)
+tint_over = Color(0.454902, 0.454902, 0.454902, 1)
+tint_progress = Color(0.180392, 0.8, 0.443137, 1)
+
+[node name="Label" type="Label" parent="HealthBar3D/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BlackCastle" type="Node3D" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -224.5
+offset_right = 224.5
+offset_bottom = 62.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Vbox" type="HBoxContainer" parent="Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CastleHealth" type="TextureProgressBar" parent="Control/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 5.0
+value = 5.0
+texture_under = ExtResource("5_ofhuk")
+texture_progress = ExtResource("5_ofhuk")
+tint_under = Color(0.905882, 0.298039, 0.235294, 1)
+tint_progress = Color(0.180392, 0.8, 0.443137, 1)
+
+[node name="Healthtext" type="Label" parent="Control/PanelContainer/MarginContainer/Vbox/CastleHealth"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -15.5
+offset_right = 62.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Castle  |  LV: 1  |  6 / 6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RepairCastle" type="Button" parent="Control/PanelContainer/MarginContainer/Vbox"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Repair"
+
+[node name="PanelContainer2" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -212.0
+offset_bottom = 142.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Gold Info" type="RichTextLabel" parent="Control/PanelContainer2/MarginContainer"]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+
+[node name="C2" parent="." instance=ExtResource("3_7x8xs")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.432309, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.50646, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_ngj6p")
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/Vbox/RepairCastle" to="." method="_on_repair_castle_pressed"]

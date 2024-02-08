@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://jr3pvo26xvt2"]
+
+[ext_resource type="Script" path="res://Scripts/Tower/portal_tower.cs" id="1_ofbcx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rcsef"]
+albedo_color = Color(0.752941, 0.223529, 0.168627, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_q5kes"]
+material = SubResource("StandardMaterial3D_rcsef")
+height = 0.01
+
+[node name="PortalTower" type="Node3D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_ofbcx")
+timer = NodePath("Timer")
+
+[node name="PortalTower" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("CylinderMesh_q5kes")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

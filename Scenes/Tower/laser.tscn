@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://bocxltvsh0gpc"]
+
+[ext_resource type="Script" path="res://Scripts/Tower/laser.cs" id="1_mrcb4"]
+[ext_resource type="Material" uid="uid://crtrfqcltnurt" path="res://Assets/Materials/LaserMaterial.tres" id="2_qdqof"]
+
+[sub_resource type="Curve" id="Curve_12lo8"]
+_data = [Vector2(0.025974, 0.684211), 0.0, 0.0, 0, 0, Vector2(0.506494, 0.947368), 0.0, 0.0, 0, 0, Vector2(1, 0.326316), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hdwk8"]
+curve = SubResource("Curve_12lo8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dbf40"]
+direction = Vector3(0, 0, 1)
+spread = 25.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+scale_curve = SubResource("CurveTexture_hdwk8")
+
+[sub_resource type="BoxMesh" id="BoxMesh_uidj8"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c1lph"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+direction = Vector3(0, 0, 1)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 75.0
+initial_velocity_max = 100.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f44i4"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.160784, 0.192157, 1)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_udo2l"]
+material = SubResource("StandardMaterial3D_f44i4")
+size = Vector2(0.1, 0.1)
+
+[node name="Laser" type="RayCast3D" node_paths=PackedStringArray("beamMesh", "endPoint", "beamParticles")]
+target_position = Vector3(0, 0, -1)
+collision_mask = 3
+script = ExtResource("1_mrcb4")
+beamMesh = NodePath("CSGCylinder3D")
+endPoint = NodePath("EndPoint")
+beamParticles = NodePath("BeamParticles")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+material_override = ExtResource("2_qdqof")
+radius = 0.1
+height = 0.01
+sides = 20
+
+[node name="EndPoint" type="GPUParticles3D" parent="."]
+visible = false
+material_override = ExtResource("2_qdqof")
+amount = 10
+lifetime = 0.5
+collision_base_size = 30.0
+process_material = SubResource("ParticleProcessMaterial_dbf40")
+draw_pass_1 = SubResource("BoxMesh_uidj8")
+
+[node name="BeamParticles" type="GPUParticles3D" parent="."]
+visible = false
+amount = 10
+lifetime = 0.1
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_c1lph")
+draw_pass_1 = SubResource("QuadMesh_udo2l")

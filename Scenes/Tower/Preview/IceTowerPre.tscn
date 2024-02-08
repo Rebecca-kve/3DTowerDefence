@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://es2041ecu5qx"]
+
+[ext_resource type="Material" uid="uid://dyogscrfb6qj6" path="res://Assets/Materials/rangepreviewmaterial.tres" id="3_vdafh"]
+[ext_resource type="PackedScene" uid="uid://34up2apdvqy6" path="res://Assets/Blender/IceTower.blend" id="4_504ju"]
+
+[node name="IceTower" type="Node3D"]
+
+[node name="IceTower" parent="." instance=ExtResource("4_504ju")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+size = Vector3(18, 0.1, 18)
+material = ExtResource("3_vdafh")

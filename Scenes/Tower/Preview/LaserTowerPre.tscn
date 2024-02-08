@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5dnyk8cjj3iw"]
+
+[ext_resource type="PackedScene" uid="uid://bgqm1nx4s55x2" path="res://Assets/Blender/Tower01.blend" id="1_idvxs"]
+[ext_resource type="PackedScene" uid="uid://ch0hsmn31uu7m" path="res://Assets/Blender/Laserturret.blend" id="2_cylij"]
+[ext_resource type="Material" uid="uid://dyogscrfb6qj6" path="res://Assets/Materials/rangepreviewmaterial.tres" id="3_l2pp1"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ygy8i"]
+material = ExtResource("3_l2pp1")
+top_radius = 10.0
+bottom_radius = 10.0
+height = 0.1
+
+[node name="TurretTower" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_ygy8i")
+
+[node name="Laserturret2" parent="." instance=ExtResource("2_cylij")]
+transform = Transform3D(1.185, 0, 0, 0, 1.185, 0, 0, 0, 1.185, 0, 1, 0)
+
+[node name="Tower012" parent="." instance=ExtResource("1_idvxs")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.454988, 0)

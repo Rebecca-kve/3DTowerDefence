@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://lqw78t7stk00"]
+
+[ext_resource type="Script" path="res://Scripts/Tower/Projectiles/Projectile.cs" id="1_lw7x5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_86gg5"]
+radius = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d1op8"]
+radius = 2.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_656oo"]
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_76r14"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_656oo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjgjy"]
+albedo_color = Color(0.145098, 0.278431, 0.12549, 1)
+metallic = 1.0
+metallic_texture = SubResource("NoiseTexture2D_76r14")
+
+[sub_resource type="SphereMesh" id="SphereMesh_qb8fj"]
+material = SubResource("StandardMaterial3D_vjgjy")
+radius = 0.25
+height = 0.5
+
+[node name="Plaugeball" type="Area3D" node_paths=PackedStringArray("Explosion")]
+collision_layer = 0
+collision_mask = 10
+script = ExtResource("1_lw7x5")
+speed = 60
+homingSpeed = 20
+Explosion = NodePath("Explosion")
+
+[node name="StaticBody3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_86gg5")
+
+[node name="Explosion" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Explosion"]
+shape = SubResource("SphereShape3D_d1op8")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_qb8fj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

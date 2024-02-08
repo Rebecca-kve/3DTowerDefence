@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://i57kowpqo1lf"]
+
+[ext_resource type="PackedScene" uid="uid://qc1hkua85gyw" path="res://Assets/Blender/GoldTower.blend" id="2_76pkg"]
+
+[node name="GoldTower" type="Node3D"]
+
+[node name="GoldTower" parent="." instance=ExtResource("2_76pkg")]
+transform = Transform3D(0.78, 0, 0, 0, 0.78, 0, 0, 0, 0.78, 0, 0.211, 0)

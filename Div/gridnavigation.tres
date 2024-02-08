@@ -1,0 +1,6 @@
+[gd_resource type="NavigationMesh" format=3 uid="uid://dhcmtg0y1pcxx"]
+
+[resource]
+vertices = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0.75, 1, 1, 0.75, -1)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_radius = 0.0

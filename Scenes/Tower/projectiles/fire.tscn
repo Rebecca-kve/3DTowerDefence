@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwxymnfdlhxvl"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eo2lh"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 0, -1)
+spread = 2.0
+gravity = Vector3(0, 1, 0)
+initial_velocity_min = 45.0
+initial_velocity_max = 50.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbwsr"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0.572549, 0.0627451, 0, 1)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_vqurg"]
+material = SubResource("StandardMaterial3D_sbwsr")
+size = Vector2(0.4, 0.4)
+
+[node name="Fire" type="GPUParticles3D"]
+amount = 500
+lifetime = 0.5
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_eo2lh")
+draw_pass_1 = SubResource("QuadMesh_vqurg")

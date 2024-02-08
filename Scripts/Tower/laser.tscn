@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://bocxltvsh0gpc"]
+
+[ext_resource type="Script" path="res://Scripts/Tower/laser.cs" id="1_176ws"]
+[ext_resource type="Material" uid="uid://crtrfqcltnurt" path="res://Assets/Materials/LaserMaterial.tres" id="1_pyyyg"]
+
+[sub_resource type="Curve" id="Curve_12lo8"]
+_data = [Vector2(0.025974, 0.684211), 0.0, 0.0, 0, 0, Vector2(0.506494, 0.947368), 0.0, 0.0, 0, 0, Vector2(1, 0.326316), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hdwk8"]
+curve = SubResource("Curve_12lo8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dbf40"]
+direction = Vector3(0, 0, -1)
+spread = 30.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_curve = SubResource("CurveTexture_hdwk8")
+
+[sub_resource type="BoxMesh" id="BoxMesh_p6rp0"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="Curve" id="Curve_1argu"]
+_data = [Vector2(0, 0.694737), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(0.987013, 0.757895), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_digka"]
+curve = SubResource("Curve_1argu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_byq6l"]
+emission_shape = 3
+emission_box_extents = Vector3(0.01, 0.2, 2)
+direction = Vector3(0, 0, -1)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+scale_curve = SubResource("CurveTexture_digka")
+collision_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_nk3td"]
+size = Vector3(0.07, 0.07, 0.07)
+
+[node name="Laser" type="RayCast3D" node_paths=PackedStringArray("beamMesh", "endPoint", "beamParticles")]
+target_position = Vector3(0, 0, -1)
+collision_mask = 3
+script = ExtResource("1_176ws")
+beamMesh = NodePath("CSGCylinder3D")
+endPoint = NodePath("EndPoint")
+beamParticles = NodePath("BeamParticles")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+material_override = ExtResource("1_pyyyg")
+radius = 0.1
+height = 0.01
+sides = 20
+
+[node name="EndPoint" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+material_override = ExtResource("1_pyyyg")
+amount = 5
+lifetime = 0.2
+collision_base_size = 30.0
+process_material = SubResource("ParticleProcessMaterial_dbf40")
+draw_pass_1 = SubResource("BoxMesh_p6rp0")
+
+[node name="BeamParticles" type="GPUParticles3D" parent="."]
+visible = false
+material_override = ExtResource("1_pyyyg")
+amount = 50
+lifetime = 0.01
+process_material = SubResource("ParticleProcessMaterial_byq6l")
+draw_pass_1 = SubResource("BoxMesh_nk3td")

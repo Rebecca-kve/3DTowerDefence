@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://57vnpr06s1wn"]
+
+[ext_resource type="PackedScene" uid="uid://c2tv4g1ecyo4a" path="res://Assets/Blender/PlaugeTower.blend" id="2_5nmfp"]
+[ext_resource type="Material" uid="uid://dyogscrfb6qj6" path="res://Assets/Materials/rangepreviewmaterial.tres" id="3_paslg"]
+
+[node name="PlagueTower" type="Node3D"]
+
+[node name="RangePreview" type="CSGCylinder3D" parent="."]
+radius = 15.0
+height = 0.1
+sides = 20
+material = ExtResource("3_paslg")
+
+[node name="PlaugeTower" parent="." instance=ExtResource("2_5nmfp")]

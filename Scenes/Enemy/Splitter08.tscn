@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://xyjm4jc1w5ct"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/Enemy.cs" id="1_mb66l"]
+[ext_resource type="Material" uid="uid://b5lmuijnbdcks" path="res://Assets/Materials/SplitterMaterial.tres" id="2_74h7s"]
+[ext_resource type="PackedScene" uid="uid://0ni26srp76ml" path="res://Assets/HealthBar/health_bar_3d.tscn" id="3_fo0fq"]
+[ext_resource type="Texture2D" uid="uid://brtdg47i34c72" path="res://Assets/HealthBar/HPBar.png" id="4_12ke8"]
+[ext_resource type="PackedScene" uid="uid://cqvr5och6sg7u" path="res://Scenes/Enemy/movement_component.tscn" id="5_ec6in"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_to8px"]
+material = ExtResource("2_74h7s")
+size = Vector2(1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ri87m"]
+size = Vector3(1, 0.5, 1)
+
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("healtbar") groups=["enemy"]]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_mb66l")
+start_speed = 7.0
+healtbar = NodePath("HealthBar3D")
+start_blood_health = 15.0
+start_penetrate_health = 0.0
+start_energy_health = 20.0
+regeneration = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("PlaneMesh_to8px")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ri87m")
+
+[node name="HealthBar3D" parent="." instance=ExtResource("3_fo0fq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8488, 0)
+texture = ExtResource("4_12ke8")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_max_distance = 2.01
+path_postprocessing = 1
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("_navAgent", "enemy") instance=ExtResource("5_ec6in")]
+_navAgent = NodePath("../NavigationAgent3D")
+enemy = NodePath("..")

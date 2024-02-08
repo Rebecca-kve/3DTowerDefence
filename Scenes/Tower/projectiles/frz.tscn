@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://c1uj1v6e25is6"]
+
+[ext_resource type="Script" path="res://Scripts/Tower/Projectiles/Curse.cs" id="1_l6v1h"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ciiyp"]
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s3tyf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ciwvn"]
+as_normal_map = true
+bump_strength = 11.1
+noise = SubResource("FastNoiseLite_s3tyf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ubyi"]
+transparency = 1
+albedo_color = Color(0, 0.984314, 0.988235, 0.47451)
+albedo_texture = SubResource("NoiseTexture2D_ciwvn")
+metallic = 1.0
+emission = Color(0.537255, 0.85098, 0.886275, 1)
+emission_energy_multiplier = 0.0
+emission_operator = 1
+normal_scale = -6.31
+
+[sub_resource type="BoxMesh" id="BoxMesh_vxtdn"]
+material = SubResource("StandardMaterial3D_7ubyi")
+size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gkrg7"]
+material = SubResource("StandardMaterial3D_7ubyi")
+size = Vector3(2, 2, 2)
+
+[node name="FRZ" type="GPUParticles3D"]
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_ciiyp")
+draw_pass_1 = SubResource("BoxMesh_vxtdn")
+script = ExtResource("1_l6v1h")
+Slow = 90
+Seconds = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_gkrg7")

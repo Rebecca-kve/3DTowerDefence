@@ -1,0 +1,51 @@
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.deps.json
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.runtimeconfig.json
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.dll
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.pdb
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.csproj.AssemblyReference.cache
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.AssemblyInfoInputs.cache
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.AssemblyInfo.cs
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.csproj.CoreCompileInputs.cache
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.csproj.CopyComplete
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.dll
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\obj\Debug\refint\3DTowerDefence.dll
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.pdb
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.genruntimeconfig.cache
+C:\Spill\Godot\3DTowerDefence\.godot\mono\temp\obj\Debug\ref\3DTowerDefence.dll
+C:\CGodot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.csproj.AssemblyReference.cache
+C:\CGodot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.GeneratedMSBuildEditorConfig.editorconfig
+C:\CGodot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.AssemblyInfoInputs.cache
+C:\CGodot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.AssemblyInfo.cs
+C:\CGodot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.csproj.CoreCompileInputs.cache
+C:\CGodot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.dll
+C:\CGodot\3DTowerDefence\.godot\mono\temp\obj\Debug\refint\3DTowerDefence.dll
+C:\CGodot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.pdb
+C:\CGodot\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.deps.json
+C:\CGodot\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.runtimeconfig.json
+C:\CGodot\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.dll
+C:\CGodot\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.pdb
+C:\CGodot\3DTowerDefence\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\CGodot\3DTowerDefence\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\CGodot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.csproj.CopyComplete
+C:\CGodot\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.genruntimeconfig.cache
+C:\CGodot\3DTowerDefence\.godot\mono\temp\obj\Debug\ref\3DTowerDefence.dll
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.deps.json
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.runtimeconfig.json
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.dll
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\bin\Debug\3DTowerDefence.pdb
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.csproj.AssemblyReference.cache
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.AssemblyInfoInputs.cache
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.AssemblyInfo.cs
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.csproj.CoreCompileInputs.cache
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.csproj.CopyComplete
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.dll
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\obj\Debug\refint\3DTowerDefence.dll
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.pdb
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\obj\Debug\3DTowerDefence.genruntimeconfig.cache
+C:\Spill\Godot\Tower Project\3DTowerDefence\.godot\mono\temp\obj\Debug\ref\3DTowerDefence.dll

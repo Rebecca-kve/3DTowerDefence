@@ -1,0 +1,173 @@
+[gd_scene load_steps=26 format=3 uid="uid://mk1lexegdgm3"]
+
+[ext_resource type="Material" uid="uid://e068hixpuaal" path="res://Assets/Materials/Dirt.tres" id="1_i45x7"]
+[ext_resource type="Material" uid="uid://h8v7a0eqndkt" path="res://Assets/Materials/Grass.tres" id="2_6ia31"]
+[ext_resource type="Material" uid="uid://bgj5t4fbjgvly" path="res://Assets/Materials/Road.tres" id="3_0j5ax"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hkeoe"]
+material = ExtResource("1_i45x7")
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fqtpe"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ljnwo"]
+material = ExtResource("2_6ia31")
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wqru1"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y2fwd"]
+material = ExtResource("3_0j5ax")
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bctfv"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_48nwd"]
+vertices = PackedVector3Array(-1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_radius = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_kfpg7"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ygurn"]
+material = ExtResource("3_0j5ax")
+size = Vector3(2, 1, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_i3txj"]
+vertices = PackedVector3Array(-0.5, 1, -1, -0.5, 1, 1, 1, 1, 1, 1, 1, -1)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_radius = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7dnj"]
+albedo_color = Color(0.952941, 0.611765, 0.0705882, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_drhto"]
+material = SubResource("StandardMaterial3D_s7dnj")
+size = Vector3(1.5, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ahhat"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ckyai"]
+material = ExtResource("3_0j5ax")
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1exdb"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_0sdnx"]
+vertices = PackedVector3Array(-0.5, 1, -0.5, -0.5, 1, 1, 1, 1, 1, 1, 1, -0.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_radius = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_qarr1"]
+size = Vector3(1.5, 1, 1.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jakr3"]
+material = ExtResource("3_0j5ax")
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8bllw"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ghr22"]
+vertices = PackedVector3Array(-1, 1, 1, 0.5, 1, 1, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 1, 0.5, 1, 1, -1, -1, 1, -1, -1, 1, 1, 0.5, 1, 0.5, 1, 1, -1)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(9, 8, 6), PackedInt32Array(6, 8, 7)]
+agent_radius = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_fmned"]
+size = Vector3(1.5, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1nsvh"]
+size = Vector3(2, 1, 1.5)
+
+[node name="LandTiles" type="Node3D"]
+
+[node name="Dirt" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_hkeoe")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Dirt"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dirt/StaticBody3D"]
+shape = SubResource("BoxShape3D_fqtpe")
+
+[node name="Grass" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ljnwo")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/StaticBody3D"]
+shape = SubResource("BoxShape3D_wqru1")
+
+[node name="Road4" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_y2fwd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Road4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Road4/StaticBody3D"]
+shape = SubResource("BoxShape3D_bctfv")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Road4"]
+navigation_mesh = SubResource("NavigationMesh_48nwd")
+navigation_layers = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Road4/NavigationRegion3D"]
+mesh = SubResource("BoxMesh_kfpg7")
+
+[node name="Road" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ygurn")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0125566, -0.0379391, -0.0125132)
+navigation_mesh = SubResource("NavigationMesh_i3txj")
+navigation_layers = 2
+
+[node name="navreg" type="MeshInstance3D" parent="Road/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+mesh = SubResource("BoxMesh_drhto")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Road"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Road/StaticBody3D"]
+shape = SubResource("BoxShape3D_ahhat")
+
+[node name="Road2" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ckyai")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Road2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Road2/StaticBody3D"]
+shape = SubResource("BoxShape3D_1exdb")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Road2"]
+navigation_mesh = SubResource("NavigationMesh_0sdnx")
+navigation_layers = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Road2/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
+mesh = SubResource("BoxMesh_qarr1")
+
+[node name="Road3" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_jakr3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Road3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Road3/StaticBody3D"]
+shape = SubResource("BoxShape3D_8bllw")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Road3"]
+navigation_mesh = SubResource("NavigationMesh_ghr22")
+navigation_layers = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Road3/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
+mesh = SubResource("BoxMesh_fmned")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Road3/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+mesh = SubResource("BoxMesh_1nsvh")

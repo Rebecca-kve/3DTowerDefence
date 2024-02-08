@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://60cf66ohh22e"]
+
+[ext_resource type="Script" path="res://Scripts/UI/PerkButton.cs" id="2_su6l7"]
+[ext_resource type="Texture2D" uid="uid://sjnmrebixubn" path="res://Assets/Icons/PerkPoint.png" id="3_sgx1f"]
+
+[node name="PerkButton" type="Button" node_paths=PackedStringArray("line")]
+custom_minimum_size = Vector2(150, 50)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Perk Description"
+toggle_mode = true
+text = "PerkName"
+icon = ExtResource("3_sgx1f")
+alignment = 0
+expand_icon = true
+script = ExtResource("2_su6l7")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = -1
+width = 3.0
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

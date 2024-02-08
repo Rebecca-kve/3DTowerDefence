@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://g5cgupohwo8i"]
+
+[ext_resource type="Material" uid="uid://dyogscrfb6qj6" path="res://Assets/Materials/rangepreviewmaterial.tres" id="2_3reml"]
+[ext_resource type="PackedScene" uid="uid://sa6ycclbc6q7" path="res://Assets/Blender/Ballista.blend" id="3_jht8j"]
+[ext_resource type="PackedScene" uid="uid://cxplutlrbhf5l" path="res://Assets/Blender/MidTower.blend" id="3_stu2s"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ivq11"]
+material = ExtResource("2_3reml")
+top_radius = 30.0
+
+[node name="Sniper Tower" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_ivq11")
+
+[node name="MidTower" parent="." instance=ExtResource("3_stu2s")]
+
+[node name="Ballista" parent="." instance=ExtResource("3_jht8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.317, 0)

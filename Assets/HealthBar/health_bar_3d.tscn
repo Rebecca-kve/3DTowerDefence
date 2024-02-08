@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=3 uid="uid://0ni26srp76ml"]
+
+[ext_resource type="Texture2D" uid="uid://bx1ywocu50dtx" path="res://Assets/HealthBar/HPbar.jpg" id="1_uceqr"]
+[ext_resource type="Script" path="res://Scripts/Enemy/HealthBar3D.cs" id="2_bua05"]
+[ext_resource type="Texture2D" uid="uid://brtdg47i34c72" path="res://Assets/HealthBar/HPBar.png" id="3_uw0b0"]
+[ext_resource type="Texture2D" uid="uid://7jauisfp7q3u" path="res://Assets/Icons/Blood.png" id="4_76pbu"]
+[ext_resource type="Texture2D" uid="uid://beofk6buyj46d" path="res://Assets/Icons/Puncture.png" id="5_ukuxu"]
+[ext_resource type="Texture2D" uid="uid://dxtcour4y7w8" path="res://Assets/Icons/EnergyIcon.png" id="6_kajkt"]
+
+[node name="HealthBar3D" type="Sprite3D" node_paths=PackedStringArray("subViewport", "bloodbar", "penetratebar", "energybar", "text", "bloodIcon", "punctureIcon", "energyIcon")]
+billboard = 1
+texture = ExtResource("1_uceqr")
+script = ExtResource("2_bua05")
+subViewport = NodePath("SubViewport")
+bloodbar = NodePath("SubViewport/Blood Health")
+penetratebar = NodePath("SubViewport/Penetration Health")
+energybar = NodePath("SubViewport/Energy Health")
+text = NodePath("SubViewport/Label")
+bloodIcon = NodePath("SubViewport/Blood Health/BloodIcon")
+punctureIcon = NodePath("SubViewport/Penetration Health/PunctureIcon")
+energyIcon = NodePath("SubViewport/Energy Health/EnergyIcon")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(300, 50)
+
+[node name="Blood Health" type="TextureProgressBar" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 90.0
+texture_under = ExtResource("3_uw0b0")
+texture_progress = ExtResource("3_uw0b0")
+tint_under = Color(0.905882, 0.298039, 0.235294, 1)
+tint_over = Color(0.454902, 0.454902, 0.454902, 1)
+tint_progress = Color(0.180392, 0.8, 0.443137, 1)
+
+[node name="BloodIcon" type="TextureRect" parent="SubViewport/Blood Health"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+texture = ExtResource("4_76pbu")
+expand_mode = 4
+
+[node name="Penetration Health" type="TextureProgressBar" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 75.0
+texture_under = ExtResource("3_uw0b0")
+texture_progress = ExtResource("3_uw0b0")
+tint_under = Color(1, 1, 1, 0)
+tint_progress = Color(0.945098, 0.768627, 0.0588235, 0.764706)
+
+[node name="PunctureIcon" type="TextureRect" parent="SubViewport/Penetration Health"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+texture = ExtResource("5_ukuxu")
+expand_mode = 4
+
+[node name="Energy Health" type="TextureProgressBar" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+texture_under = ExtResource("3_uw0b0")
+texture_progress = ExtResource("3_uw0b0")
+tint_under = Color(1, 1, 1, 0)
+tint_progress = Color(0.160784, 0.501961, 0.72549, 0.756863)
+
+[node name="EnergyIcon" type="TextureRect" parent="SubViewport/Energy Health"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+texture = ExtResource("6_kajkt")
+expand_mode = 4
+
+[node name="Label" type="Label" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "LV: 01"
+horizontal_alignment = 1
+vertical_alignment = 1

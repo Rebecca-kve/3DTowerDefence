@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv5lovdkyt07k"]
+
+[ext_resource type="PackedScene" uid="uid://1etytlarabs2" path="res://Assets/Blender/FireTower.blend" id="2_box52"]
+[ext_resource type="PackedScene" uid="uid://dwxymnfdlhxvl" path="res://Scenes/Tower/projectiles/fire.tscn" id="3_rhy0s"]
+
+[node name="FireTower" type="Node3D"]
+
+[node name="Fire" parent="." instance=ExtResource("3_rhy0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.4)
+lifetime = 0.35
+
+[node name="FireTower" parent="." instance=ExtResource("2_box52")]
+transform = Transform3D(-1.63918e-08, 0, 0.375, 0, 0.375, 0, -0.375, 0, -1.63918e-08, 0, 0.123, 0)

@@ -1,0 +1,135 @@
+[gd_scene load_steps=9 format=3 uid="uid://ji1efiadkhrs"]
+
+[ext_resource type="PackedScene" uid="uid://1etytlarabs2" path="res://Assets/Blender/FireTower.blend" id="1_dl3w8"]
+[ext_resource type="Script" path="res://Scripts/Tower/Firetower.cs" id="1_f66ci"]
+[ext_resource type="PackedScene" uid="uid://dwxymnfdlhxvl" path="res://Scenes/Tower/projectiles/fire.tscn" id="2_8n4ba"]
+[ext_resource type="Material" uid="uid://dyogscrfb6qj6" path="res://Assets/Materials/rangepreviewmaterial.tres" id="3_b4ibo"]
+[ext_resource type="AudioStream" uid="uid://onflwgbqxv01" path="res://Assets/SoundEffect/torchsound.ogg" id="5_ljl6d"]
+[ext_resource type="Texture2D" uid="uid://bycgsvobw65n5" path="res://Assets/Icons/Goldsmall.png" id="6_egq78"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b8mw6"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pvyb8"]
+
+[node name="FireTower" type="Node3D" node_paths=PackedStringArray("area", "shooteffect", "sound", "rangePreview", "info", "infotext", "uDamageB", "uRangeB", "sellB") groups=["FireTower", "Tower"]]
+script = ExtResource("1_f66ci")
+area = NodePath("Area3D")
+shooteffect = NodePath("Fire")
+sound = NodePath("AudioStreamPlayer3D")
+name = "FireTower"
+rangePreview = NodePath("Area3D/RangePreview")
+attack = 3
+energy = 0.9
+puncture = 0.7
+blood = 1.4
+range = 16.0
+info = NodePath("Control")
+infotext = NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/infotext")
+uDamageB = NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Upgrade Damage")
+uRangeB = NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Upgrade Range")
+sellB = NodePath("Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Sell")
+
+[node name="FireTower" parent="." instance=ExtResource("1_dl3w8")]
+transform = Transform3D(-1.63918e-08, 0, 0.375, 0, 0.375, 0, -0.375, 0, -1.63918e-08, 0, 0.123, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_b8mw6")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 4
+collision_mask = 2
+input_ray_pickable = false
+
+[node name="Detection" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_pvyb8")
+
+[node name="RangePreview" type="CSGBox3D" parent="Area3D"]
+visible = false
+material = ExtResource("3_b4ibo")
+
+[node name="Fire" parent="." instance=ExtResource("2_8n4ba")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.4)
+emitting = false
+visibility_aabb = AABB(-1, -1, 2.45, 2, 2, -40)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_ljl6d")
+volume_db = 10.0
+unit_size = 3.0
+max_distance = 200.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -94.5
+offset_right = 106.0
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="infotext" type="RichTextLabel" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+text = "
+"
+
+[node name="GridContainer" type="GridContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Upgrade Damage" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("6_egq78")
+alignment = 0
+
+[node name="Upgrade Range" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "
+"
+icon = ExtResource("6_egq78")
+alignment = 0
+
+[node name="Sell" type="Button" parent="Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "
+"
+icon = ExtResource("6_egq78")
+alignment = 0
+
+[connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Upgrade Damage" to="." method="_on_upgrade_damage_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Upgrade Range" to="." method="_on_upgrade_range_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/GridContainer/Sell" to="." method="_on_sell_pressed"]

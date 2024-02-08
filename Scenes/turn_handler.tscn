@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://da62krvmxkaux"]
+
+[ext_resource type="Script" path="res://Scripts/TurnHandler.cs" id="1_wx5ux"]
+
+[node name="TurnHandler" type="Node3D"]
+script = ExtResource("1_wx5ux")

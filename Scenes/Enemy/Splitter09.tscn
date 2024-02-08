@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://cutcth17dea8v"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/Enemy.cs" id="1_wcp8d"]
+[ext_resource type="PackedScene" uid="uid://0ni26srp76ml" path="res://Assets/HealthBar/health_bar_3d.tscn" id="3_ik3lp"]
+[ext_resource type="Texture2D" uid="uid://brtdg47i34c72" path="res://Assets/HealthBar/HPBar.png" id="4_vmkcw"]
+[ext_resource type="PackedScene" uid="uid://cqvr5och6sg7u" path="res://Scenes/Enemy/movement_component.tscn" id="5_kf100"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k58wo"]
+albedo_color = Color(0.580392, 1, 1, 1)
+metallic = 1.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_o7nc8"]
+material = SubResource("StandardMaterial3D_k58wo")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f7ulv"]
+points = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("healtbar") groups=["enemy"]]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_wcp8d")
+start_speed = 7.0
+attack = 2
+split = "Splitter08"
+healtbar = NodePath("HealthBar3D")
+start_blood_health = 0.0
+start_penetrate_health = 30.0
+start_energy_health = 30.0
+regeneration = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("PrismMesh_o7nc8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_f7ulv")
+
+[node name="HealthBar3D" parent="." instance=ExtResource("3_ik3lp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8488, 0)
+texture = ExtResource("4_vmkcw")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_max_distance = 2.01
+path_postprocessing = 1
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("_navAgent", "enemy") instance=ExtResource("5_kf100")]
+_navAgent = NodePath("../NavigationAgent3D")
+enemy = NodePath("..")
