@@ -109,4 +109,46 @@ public partial class Camera : Node3D {
         }
         camera.Fov = newzoom;
     }
+
+    // New Code To use mouse drag
+    private bool DragCamera = false;
+    private Vector2 mouseLockPosition;
+
+    public override void _UnhandledInput(InputEvent @event) {
+        //if (InputMap.ActionHasEvent("Grab_Camera", @event)) { mouseLockPosition = GetViewport().GetMousePosition(); }
+
+
+        // Check if the "Drag_Camera" action is pressed
+        if (@event.IsActionPressed("Grab_Camera")) {
+            mouseLockPosition = GetViewport().GetMousePosition();
+            DragCamera = true;
+
+            Input.MouseMode = Input.MouseModeEnum.Captured; // Hide the mouse
+        }
+
+        // Check if the "Drag_Camera" action is released
+        if (@event.IsActionReleased("Grab_Camera")) {
+            DragCamera = false;
+
+            Input.MouseMode = Input.MouseModeEnum.Visible; // Show the mouse
+            GetViewport().WarpMouse(mouseLockPosition); // Restore mouse position
+        }
+
+        // Handle mouse movement when DragCamera is true
+        if (DragCamera && @event is InputEventMouseMotion mouseMotion) {
+            Vector3 inputDir = new Vector3(0, 0, 0);
+            const float movementspeed = 4.0f;
+
+            inputDir.X = -mouseMotion.Relative.X; // Inverting the X direction
+            inputDir.Z = -mouseMotion.Relative.Y; // Inverting the Y direction
+
+
+            if (DragCamera) {
+                Vector3 moveDir = Transform.Basis.Z * inputDir.Z + Transform.Basis.X * inputDir.X;
+                Position += moveDir * movementspeed * (float)GetProcessDeltaTime();
+            }
+
+        }
+
+    }
 }
